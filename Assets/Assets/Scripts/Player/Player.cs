@@ -91,7 +91,6 @@ public class Player : MonoBehaviour
         Debug.DrawRay(_boxCollider2.bounds.center - new Vector3(_boxCollider2.bounds.extents.x, 0), Vector2.down * (_boxCollider2.bounds.extents.y + extraHeightText), rayColor);
         Debug.DrawRay(_boxCollider2.bounds.center - new Vector3(_boxCollider2.bounds.extents.x, _boxCollider2.bounds.extents.y + extraHeightText), Vector2.right * (_boxCollider2.bounds.extents.x * 2f), rayColor);
 
-        Debug.Log(raycastHit.collider);
         return raycastHit.collider != null;
     }
 
