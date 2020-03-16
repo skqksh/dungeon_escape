@@ -33,7 +33,7 @@ public class MossGiant : Enemy
 
     private void Movement()
     {
-        _monsterSprite.flipX = _currentTarget != pointA.position;
+        _monsterSprite.flipX = _currentTarget == pointA.position;
         
         if (transform.position == pointA.position)
         {
