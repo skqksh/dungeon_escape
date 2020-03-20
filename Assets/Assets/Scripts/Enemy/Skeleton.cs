@@ -5,8 +5,21 @@ using UnityEngine;
 public class Skeleton : Enemy,IDamageable
 {
     public int Health { get; set; }
+
+    public override void Init()
+    {
+        base.Init();
+        this.Health = health;
+    }
+
     public void Damage(int damageAmount)
     {
-        throw new System.NotImplementedException();
+        animator.SetTrigger("Hit");
+        --Health;
+        if (Health < 1)
+        {
+            Destroy(this.gameObject);
+        }
+        Debug.Log("ouch : " + damageAmount);
     }
 }
