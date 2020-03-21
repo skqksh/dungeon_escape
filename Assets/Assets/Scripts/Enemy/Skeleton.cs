@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skeleton : Enemy,IDamageable
+public class Skeleton : Enemy, IDamageable
 {
     public int Health { get; set; }
 
@@ -20,6 +20,7 @@ public class Skeleton : Enemy,IDamageable
         {
             Destroy(this.gameObject);
         }
+
         Debug.Log("ouch : " + damageAmount);
     }
 }
