@@ -13,7 +13,7 @@ public abstract class Enemy : MonoBehaviour
     protected Vector3 currentTarget;
     protected Animator animator;
     protected SpriteRenderer monsterSprite;
-
+    protected float attackRange = 1.2f;
 
     private Player _player;
 
@@ -31,11 +31,10 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Update()
     {
-        float distanceFromPlayer = Vector3.Distance(_player.transform.position, transform.position);
-
-        animator.SetBool("InCombat", distanceFromPlayer < 1.2);
-
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetBool("InCombat"))
+        Combat();
+            
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")
+            || animator.GetBool("InCombat"))
         {
             return;
         }
@@ -43,6 +42,19 @@ public abstract class Enemy : MonoBehaviour
         Movement();
     }
 
+    public virtual void Combat()
+    {
+        float distanceFromPlayer = Vector3.Distance(_player.transform.position, transform.position);
+        bool inCombat = distanceFromPlayer < attackRange;
+        animator.SetBool("InCombat", inCombat);
+        if (inCombat)
+        {
+            Vector3 direction = _player.transform.position - transform.position;
+            monsterSprite.flipX = direction.x < 0;
+        }
+        
+    }
+    
     public virtual void Movement()
     {
         monsterSprite.flipX = currentTarget == pointA.position;

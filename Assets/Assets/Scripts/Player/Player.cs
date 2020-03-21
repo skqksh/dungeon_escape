@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     private Rigidbody2D _rbody;
-    [SerializeField]
-    private float _jumpForce = 220f;
-    [SerializeField]
-    private float _speed = 2.5f;
+    [SerializeField] private float _jumpForce = 220f;
+    [SerializeField] private float _speed = 2.5f;
 
     private PlayerAnimation _playerAnim;
 
@@ -35,7 +33,6 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-
         float move = Input.GetAxisRaw("Horizontal");
 
         if (move != 0)
@@ -53,7 +50,6 @@ public class Player : MonoBehaviour
         if (_rbody.velocity.y == 0)
         {
             _playerAnim.Jump(false);
-
         }
 
         if (IsGrounded())
@@ -68,15 +64,14 @@ public class Player : MonoBehaviour
                 _playerAnim.Attack();
             }
         }
-
     }
 
 
     private bool IsGrounded()
     {
-
         float extraHeightText = 0.1f;
-        RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider2.bounds.center, _boxCollider2.bounds.size, 0f, Vector2.down, extraHeightText, 1 << 8);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider2.bounds.center, _boxCollider2.bounds.size, 0f,
+            Vector2.down, extraHeightText, 1 << 8);
 
         Color rayColor;
         if (raycastHit.collider != null)
@@ -87,11 +82,22 @@ public class Player : MonoBehaviour
         {
             rayColor = Color.red;
         }
-        Debug.DrawRay(_boxCollider2.bounds.center + new Vector3(_boxCollider2.bounds.extents.x, 0), Vector2.down * (_boxCollider2.bounds.extents.y + extraHeightText), rayColor);
-        Debug.DrawRay(_boxCollider2.bounds.center - new Vector3(_boxCollider2.bounds.extents.x, 0), Vector2.down * (_boxCollider2.bounds.extents.y + extraHeightText), rayColor);
-        Debug.DrawRay(_boxCollider2.bounds.center - new Vector3(_boxCollider2.bounds.extents.x, _boxCollider2.bounds.extents.y + extraHeightText), Vector2.right * (_boxCollider2.bounds.extents.x * 2f), rayColor);
+
+        Debug.DrawRay(_boxCollider2.bounds.center + new Vector3(_boxCollider2.bounds.extents.x, 0),
+            Vector2.down * (_boxCollider2.bounds.extents.y + extraHeightText), rayColor);
+        Debug.DrawRay(_boxCollider2.bounds.center - new Vector3(_boxCollider2.bounds.extents.x, 0),
+            Vector2.down * (_boxCollider2.bounds.extents.y + extraHeightText), rayColor);
+        Debug.DrawRay(
+            _boxCollider2.bounds.center - new Vector3(_boxCollider2.bounds.extents.x,
+                _boxCollider2.bounds.extents.y + extraHeightText),
+            Vector2.right * (_boxCollider2.bounds.extents.x * 2f), rayColor);
 
         return raycastHit.collider != null;
     }
 
+    public int Health { get; set; }
+    public void Damage(int damageAmount)
+    {
+        Debug.Log("ouch!!@");
+    }
 }
