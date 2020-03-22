@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spider  : Enemy, IDamageable
+public class Spider : Enemy, IDamageable
 {
     public int Health { get; set; }
+
+    public GameObject acidEffectPrefab;
 
     public override void Init()
     {
@@ -23,5 +25,19 @@ public class Spider  : Enemy, IDamageable
         }
 
         Debug.Log("ouch : " + damageAmount);
+    }
+
+    public override void Combat()
+    {
+        base.Combat();
+        if (animator.GetBool("InCombat"))
+        {
+            Attack();
+        }
+    }
+
+    public void Attack()
+    {
+        Instantiate(acidEffectPrefab, transform.position, Quaternion.identity);
     }
 }

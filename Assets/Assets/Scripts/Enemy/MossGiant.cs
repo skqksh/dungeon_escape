@@ -21,7 +21,5 @@ public class MossGiant : Enemy, IDamageable
         {
             Destroy(this.gameObject);
         }
-
-        Debug.Log("ouch : " + damageAmount);
     }
 }

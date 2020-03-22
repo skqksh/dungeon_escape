@@ -44,6 +44,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Combat()
     {
+    
         float distanceFromPlayer = Vector3.Distance(_player.transform.position, transform.position);
         bool inCombat = distanceFromPlayer < attackRange;
         animator.SetBool("InCombat", inCombat);
