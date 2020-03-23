@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    public GameObject dismondPrefab;
+    
     [SerializeField] protected int health;
     [SerializeField] protected int speed;
     [SerializeField] protected int gems;
@@ -14,7 +16,8 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     protected SpriteRenderer monsterSprite;
     protected float attackRange = 1.2f;
-
+    protected bool isDead = false;
+    
     private Player _player;
 
     public virtual void Init()
@@ -31,6 +34,11 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
+        
         Combat();
             
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")

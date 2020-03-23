@@ -10,6 +10,7 @@
           <e p="Scripts" t="Include">
             <e p="AcidEffect.cs" t="Include" />
             <e p="Attack.cs" t="Include" />
+            <e p="DiamondEffect.cs" t="Include" />
             <e p="Enemy" t="Include">
               <e p="Enemy.cs" t="Include" />
               <e p="MossGiant.cs" t="Include" />

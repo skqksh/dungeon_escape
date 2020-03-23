@@ -3,7 +3,11 @@ guid: 13b4ffe1074af824b9638824b3613619
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dismondPrefab: {fileID: 317885000637239511, guid: b1675da915db2e346a7219168eabe0e7,
+      type: 3}
+  - pointA: {instanceID: 0}
+  - pointB: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

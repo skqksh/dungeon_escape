@@ -3,6 +3,7 @@ using Debug = UnityEngine.Debug;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    public float gems = 0;
     private Rigidbody2D _rbody;
     [SerializeField] private float _jumpForce = 220f;
     [SerializeField] private float _speed = 2.5f;
